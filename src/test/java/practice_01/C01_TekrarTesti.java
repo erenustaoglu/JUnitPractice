@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class AmazonSearchTest {
+public class C01_TekrarTesti {
 
-        // 1. Bir class oluşturun : AmazonSearchTest
+        // 1. Bir class oluşturun : C01_TekrarTesti
         // 2. Main method oluşturun ve aşağıdaki görevi tamamlayın.
         // a.google web sayfasına gidin. https://www. amazon.com/
         //         b. Search(ara) “city bike”
