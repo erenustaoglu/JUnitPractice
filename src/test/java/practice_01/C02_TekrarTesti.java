@@ -11,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-//1-C01_TekrarTesti isimli bir class olusturun
+//1-C02_TekrarTesti isimli bir class olusturun
 //2- https://www.amazon.com/ adresine gidin
 //3- Browseri tam sayfa yapin
 //4-Sayfayi “refresh” yapin
