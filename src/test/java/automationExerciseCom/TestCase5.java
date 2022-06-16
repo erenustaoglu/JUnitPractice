@@ -1,18 +1,21 @@
 package automationExerciseCom;
 
+import com.github.javafaker.Faker;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.time.Duration;
 
-public class TestCase2 {
+public class TestCase5 {
 
     WebDriver driver;
 
@@ -29,6 +32,7 @@ public class TestCase2 {
     public void tearDown() {
         //8-Sayfayi kapatin
         driver.close();
+
     }
 
     @Test
@@ -40,21 +44,23 @@ public class TestCase2 {
         Assert.assertTrue(testElementi.isDisplayed());
         //4. Click on 'Signup / Login' button
         driver.findElement(By.xpath("//a[@href='/login']")).click();
-        //5. Verify 'Login to your account' is visible
-        WebElement loginYazisi = driver.findElement(By.xpath("//h2[text()='Login to your account']"));
-        Assert.assertTrue(loginYazisi.isDisplayed());
-        //6. Enter correct email address and password
-        driver.findElement(By.xpath("(//input[@type='email'])[1]")).sendKeys("erendeneme1903@gmail.com");
-        driver.findElement(By.xpath("(//input[@type='password'])")).sendKeys("deneme123");
-        //7. Click 'login' button
-        driver.findElement(By.xpath("//button[text()='Login']")).click();
-        //8. Verify that 'Logged in as username' is visible
-        WebElement isimleGirisYapildiYazisi = driver.findElement(By.xpath("//i[@class='fa fa-user']"));
-        Assert.assertTrue(isimleGirisYapildiYazisi.isDisplayed());
-        //9. Click 'Delete Account' button
-        driver.findElement(By.xpath("//a[@href='/delete_account']")).click();
-        //10. Verify that 'ACCOUNT DELETED!' is visible --> site hata veriyor...
-        WebElement hesapSilindi = driver.findElement(By.xpath("//h4[text()='Are you sure you want to delete this Delete Account?']"));
-        Assert.assertTrue(hesapSilindi.isDisplayed());
+        //5. Verify 'New User Signup!' is visible
+        WebElement newUserSignUpButonu = driver.findElement(By.xpath("//*[text()='New User Signup!']"));
+        Assert.assertTrue(newUserSignUpButonu.isDisplayed());
+        //6. Enter name and already registered email address
+        //7. Click 'Signup' button
+        Faker faker = new Faker();
+        Actions actions = new Actions(driver);
+        WebElement newUserNameButonu = driver.findElement(By.xpath("//input[@type='text']"));
+        actions.click(newUserNameButonu)
+                .sendKeys(faker.name().firstName())
+                .sendKeys(Keys.TAB)
+                .sendKeys("erendeneme1903@gmail.com")
+                .sendKeys(Keys.TAB)
+                .sendKeys(Keys.ENTER)
+                .perform();
+        //8. Verify error 'Email Address already exist!' is visible
+        WebElement emailKayıtlıYazisi = driver.findElement(By.xpath("//*[text()='Email Address already exist!']"));
+        Assert.assertTrue(emailKayıtlıYazisi.isDisplayed());
     }
 }
